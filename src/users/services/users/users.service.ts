@@ -15,7 +15,7 @@ export class UsersService {
     return this.userRepository.save(newUser);
   }
 
-  findUsersById(id: number) {
+  findUsersById(id: string) {
     return this.userRepository.findOneBy({
       id,
     });
@@ -30,14 +30,13 @@ export class UsersService {
     }
   }
 
-  async deleteUser(id: number) {
+  async deleteUser(id: string) {
     const userExists = await this.userRepository.exist({
       where: {
         id,
       },
     });
     if (!userExists) {
-      console.log('entrei');
       return Promise.reject({ message: 'Id not found' });
     }
 
