@@ -24,7 +24,7 @@ export class UsersController {
   }
 
   @Get(':id')
-  findUsersById(@Param('id', ParseIntPipe) id: number) {
+  findUsersById(@Param('id', ParseIntPipe) id: string) {
     return this.userService.findUsersById(id);
   }
 
@@ -35,11 +35,11 @@ export class UsersController {
   }
 
   @Delete(':id')
-  deleteUser(@Param('id', ParseIntPipe) id: number, @Res() res: Response) {
+  deleteUser(@Param('id', ParseIntPipe) id: string, @Res() res: Response) {
     this.userService
       .deleteUser(id)
       .then(() => {
-        return res.status(203).send();
+        return res.status(204).send();
       })
       .catch((error) => {
         return res.status(418).json({ error }).send();
